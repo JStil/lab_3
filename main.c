@@ -103,12 +103,10 @@ int main(int argc, const char *argv[]) {
     double full_result = 0;
     gettimeofday(&T1, NULL);
 
-
-    // schedule(static, 2)
-#pragma omp parallel for default(none) private(previous) shared(N) reduction(+:full_result) num_threads(TN)
+#pragma omp parallel for private(previous) shared(N) reduction(+:full_result) num_threads(TN) 
     for (unsigned si = 0; si < EXPERIMENTS; si++) {
         srand(si);
-        unsigned copy = si;
+        unsigned copy = si; //создание копии для избежания false sharing
         size_t N_2 = N / 2;
         previous = 0;
         double *M1 = malloc(N * sizeof(double));
@@ -127,7 +125,6 @@ int main(int argc, const char *argv[]) {
         double result = 0;
         REDUCEARR(result, M2, N_2, double, DBL_MAX);
         full_result += result;
-        // printf("Experiment %u/%u result: %f\n", si + 1, EXPERIMENTS, result);
         free(M1);
         free(M2);
     }
