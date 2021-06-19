@@ -5,15 +5,15 @@
 
 #define DBL_MAX 1.79769e+308
 
-// Var = 1 + (6 * 4 * 13) % (7,8,6,7) = 1 + 312 % (7,8,6,7)
+// Var = 1 + (8 * 6 * 10) % (7,8,6,7) = 1 + 480 % (7,8,6,7)
 // Map M1 - 5 - (M1[i] / PI) ^ 3
 // Map M2 - 1 - abs(sin(M2[i] + M2[i-1]))
 // Merge -  1 - M1[i] ^ M2[i]
 // Sort  -  5 - Gnome Sort
 
 #define EXPERIMENTS 50
-#define A 312
-#define A10 3120
+#define A 480
+#define A10 4800
 
 #define SWAP(x, y, tt) do { \
     tt buff = x;            \
